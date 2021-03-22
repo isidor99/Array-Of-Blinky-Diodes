@@ -52,8 +52,8 @@ int main() {
 
 	signal(SIGINT, signalHandler);
 
-	int pins[] = { 26, 19 };
-	int numOfPins = 2;
+	int pins[] = { 5, 6, 13, 19, 26 };
+	int numOfPins = 5;
 
 	// init pin
 	//
@@ -74,26 +74,10 @@ int main() {
 	for (int i = 0; i < numOfPins; ++i)
 		writeFileWithName(pins[i], "out", "direction");
 
-	/*
-	file = open("/sys/class/gpio/gpio26/direction", O_WRONLY);
-	if (file == -1) exitWithError("Unable to open /sys/class/gpio/gpio26/direction");
-
-	writeToFile(file, "out", "Unable to write file /sys/class/gpio/gpio26/direction");
-
-	close(file);
-
-	file = open("/sys/class/gpio/gpio19/direction", O_WRONLY);
-	if (file == -1) exitWithError("Unable to open /sys/class/gpio/gpio19/direction");
-
-	writeToFile(file, "out", "Unable to write file /sys/class/gpio/gpio19/direction");
-
-	close(file);*/
-
 	// write value to file
 	//
-
 	int power = 1;
-	int sleep = 250000;
+	int sleep = 500000;
 	const char* filename = "value";
 
 	while (run) {
