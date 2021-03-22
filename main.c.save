@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <errno.h>
+#include <unistd.h>
+#include <signal.h>
+#include <string.h>
+
+void exitWithError(const char* err) {
+	perror(err);
+	exit(1);
+}
+
+void writeToFile(int file, const char* message, const char* err) {
+	if (write(file, message, strlen(message)) != strlen(message))
+		exitWithError(err);
+}
+
+int main() {
+
+	// init pin
+	//
+	int file = open(strcat(PATH, "/export"), O_WRONLY);
+	if (file == -1) exitWithError(strcat(OPEN_ERR_MSG, "/export"));
+
+	writeToFile(file, "26", "Unable to write file /sys/class/gpio/export");
+
+	// set pin direction
+	//
+
+	return 0;
+}
